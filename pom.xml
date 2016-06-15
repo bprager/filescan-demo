@@ -55,6 +55,11 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 			</plugin>
+			<plugin>
+			  <groupId>net.ju-n.maven.plugins</groupId>
+			  <artifactId>vagrant-maven-plugin</artifactId>
+			  <version>1.0.1</version>
+			</plugin>
 		</plugins>
 	</build>
 	
