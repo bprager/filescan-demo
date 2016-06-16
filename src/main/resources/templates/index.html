@@ -16,11 +16,35 @@
 </head>
 
 <body ng-app="fileApp">
-	<br />
-	<div class="container">File to upload</div>
-	<div class="container" ng-controller="file-controller">
-	<input type="file" file-model="myFile" />
-		<button class="btn btn-primary" type="button" ng-click="uploadFile()">upload</button>
+	<div class="container">
+		<br /> <br />
+		<div id="description" class="margin-top-2">
+			Here you can upload files which will be analyzed for various META
+			data, including <em>viruses, worms, trojans, and malware</em>. <br />
+			The analysis will be done asynchronously in the background
+		</div>
+		<br />
+		<ul id="action-options" class="tabs nav nav-tabs margin-top-2 center">
+			<li id="file-tab" class="active"><a href="#file"
+				data-toggle="tab"><i class="icon-file"></i> File</a></li>
+			<li id="search-tab" class="disabled"><a id="search-tab-chooser"
+				href="#search" data-toggle="tab"><i class="icon-search"></i>
+					Search</a></li>
+		</ul>
+		<div id="file" class="container" ng-controller="file-controller">
+		<br />
+			<span id="file-name" class="file-name"
+				style="-moz-user-select: none; text-align: left;"> <input
+				type="file" file-model="myFile" /></span> 
+			<span><button ng-click="uploadFile()">upload</button></span>
+		</div>
+		<div id="search" class="container" style='display: none'>
+			<div class="center" style="margin-bottom: 28px">
+				<input id="query" type="text" name="query" placeholder="hash" /> <span
+					id="query" class="action" style="-moz-user-select: none;">
+					Enter Term </span>
+			</div>
+		</div>
 	</div>
 
 	<script
