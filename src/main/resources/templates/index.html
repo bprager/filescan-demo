@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head lang="en">
+
+<title>File Uploader</title>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+
+<link
+	href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.6/css/bootstrap.min.css"
+	th:href="@{/webjars/bootstrap/3.3.6/css/bootstrap.min.css}"
+	rel="stylesheet" media="screen" />
+
+<link href="../static/css/demo.css" th:href="@{css/demo.css}"
+	rel="stylesheet" media="screen" />
+
+</head>
+
+<body ng-app="fileApp">
+	<div class="container" ng-controller="file-controller">
+		<input type="file" file-model="myFile" />
+		<button type="button" ng-click="uploadFile()">upload</button>
+	</div>
+
+	<script
+		src="http://cdn.jsdelivr.net/webjars/angularjs/1.5.5/angular.min.js"
+		th:src="@{/webjars/angularjs/1.5.5/angular.min.js}"></script>
+	<script src="../static/js/app.js" th:src="@{js/app.js}"></script>
+
+</body>
+</html>
