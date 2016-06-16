@@ -6,8 +6,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
 <link
-	href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.6/css/bootstrap.min.css"
-	th:href="@{/webjars/bootstrap/3.3.6/css/bootstrap.min.css}"
+	href="http://cdn.jsdelivr.net/webjars/bootstrap/3.3.6/css/bootstrap.css"
+	th:href="@{/webjars/bootstrap/3.3.6/css/bootstrap.css}"
 	rel="stylesheet" media="screen" />
 
 <link href="../static/css/demo.css" th:href="@{css/demo.css}"
@@ -16,9 +16,11 @@
 </head>
 
 <body ng-app="fileApp">
+	<br />
+	<div class="container">File to upload</div>
 	<div class="container" ng-controller="file-controller">
-		<input type="file" file-model="myFile" />
-		<button type="button" ng-click="uploadFile()">upload</button>
+	<input type="file" file-model="myFile" />
+		<button class="btn btn-primary" type="button" ng-click="uploadFile()">upload</button>
 	</div>
 
 	<script

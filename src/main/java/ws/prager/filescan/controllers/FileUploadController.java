@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.multipart.MultipartFile;
@@ -22,6 +23,7 @@ public class FileUploadController {
         // TODO Auto-generated constructor stub
     }
 
+    @CrossOrigin
     @RequestMapping(value = "/upload", method = RequestMethod.POST)
     public void UploadFile(MultipartHttpServletRequest request, HttpServletResponse response) {
         Iterator<String> itr = request.getFileNames();
