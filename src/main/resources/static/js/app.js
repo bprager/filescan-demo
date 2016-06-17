@@ -1,4 +1,4 @@
-var app = angular.module('fileApp', []);
+var app = angular.module('fileApp', ['angular-encryption']);
 
 app.directive('fileModel', [ '$parse', function($parse) {
 	return {
@@ -17,9 +17,11 @@ app.directive('fileModel', [ '$parse', function($parse) {
 } ]);
 
 app.service('fileUpload', [ '$http', function($http) {
-	this.uploadFileToUrl = function(file, uploadUrl) {
+	this.uploadFileToUrl = function(file, hash, uploadUrl) {
 		var fd = new FormData();
 		fd.append('file', file);
+		fd.append('name', file.name)
+		fd.append('sha256', hash)
 		$http.post(uploadUrl, fd, {
 			transformRequest : angular.identity,
 			headers : {
@@ -31,11 +33,13 @@ app.service('fileUpload', [ '$http', function($http) {
 	}
 } ]);
 
-app.controller('file-controller', [ '$scope', 'fileUpload', function($scope, fileUpload) {
+app.controller('file-controller', [ '$scope', 'fileUpload', 'sha256', function($scope, fileUpload, sha256) {
 	$scope.uploadFile = function() {
 		var file = $scope.myFile;
 		var uploadUrl = "/upload";
-		fileUpload.uploadFileToUrl(file, uploadUrl);
+		var hash = sha256.convertToSHA256(file);
+		console.log("file sha256-hash=" + hash);
+		fileUpload.uploadFileToUrl(file, hash, uploadUrl);
 	};
 
 } ]);

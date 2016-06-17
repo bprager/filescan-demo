@@ -1,17 +1,14 @@
 package ws.prager.filescan.controllers;
 
-import java.util.Iterator;
-
-import javax.servlet.http.HttpServletResponse;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 @Controller
 public class FileUploadController {
@@ -25,13 +22,16 @@ public class FileUploadController {
 
     @CrossOrigin
     @RequestMapping(value = "/upload", method = RequestMethod.POST)
-    public void UploadFile(MultipartHttpServletRequest request, HttpServletResponse response) {
-        Iterator<String> itr = request.getFileNames();
+    public @ResponseBody
+    // void UploadFile(MultipartHttpServletRequest request, HttpServletResponse
+    // response) {
+    void uploadFileHandler(@RequestParam("name") String name, @RequestParam("sha256") String sha256,
+            @RequestParam("file") MultipartFile file) {
 
-        MultipartFile file = request.getFile(itr.next());
+        logger.debug(name + " uploaded");
+        logger.debug("hash: " + sha256);
+        logger.debug("file length: " + file.getSize());
 
-        String fileName = file.getOriginalFilename();
-        logger.debug(fileName + " uploaded");
     }
 
 }
