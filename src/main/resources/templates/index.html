@@ -15,7 +15,7 @@
 
 </head>
 
-<body ng-app="fileApp">
+<body data-ng-app="fileApp">
 	<div class="container">
 		<br /> <br />
 		<div id="description" class="margin-top-2">
@@ -31,12 +31,12 @@
 				href="#search" data-toggle="tab"><i class="icon-search"></i>
 					Search</a></li>
 		</ul>
-		<div id="file" class="container" ng-controller="file-controller">
+		<div id="file" class="container" data-ng-controller="file-controller">
 		<br />
 			<span id="file-name" class="file-name"
 				style="-moz-user-select: none; text-align: left;"> <input
-				type="file" file-model="myFile" /></span> 
-			<span><button ng-click="uploadFile()">upload</button></span>
+				type="file" data-file-model="myFile" /></span> 
+			<span><button data-ng-click="uploadFile()">upload</button></span>
 		</div>
 		<div id="search" class="container" style='display: none'>
 			<div class="center" style="margin-bottom: 28px">
