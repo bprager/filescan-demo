@@ -10,7 +10,9 @@ Vagrant.configure(2) do |config|
     search_config.vm.box = "ubuntu/trusty64"
     search_config.vm.hostname = "search"
     search_config.vm.network :private_network, ip: "10.0.15.10"
+    config.vm.network "forwarded_port", guest: 9200, host: 9200
     config.vm.network "forwarded_port", guest: 9201, host: 9201
+    config.vm.network "forwarded_port", guest: 9300, host: 9300
     config.vm.network "forwarded_port", guest: 9301, host: 9301
     config.vm.synced_folder "data/", "/opt/elasticsearch/data"
     config.vm.synced_folder "logs/", "/opt/elasticsearch/logs"
