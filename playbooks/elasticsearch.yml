@@ -1,0 +1,10 @@
+---
+- name: One Node Elasticsearch
+  hosts: search
+  become: True
+  roles:
+    - { role: ansiblebit.oracle-java, oracle_java_set_as_default: yes }
+    - { role: elasticsearch, es_instance_name: "node1" , es_config: { network.host: "0.0.0.0" , discovery.zen.ping.multicast.enabled: false } }
+  vars:
+    es_major_version: "1.5"
+    es_version: "1.5.2"
