@@ -16,49 +16,49 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.elasticsearch.core.ElasticsearchTemplate;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import ws.prager.filescan.models.Post;
-import ws.prager.filescan.models.PostService;
 import ws.prager.filescan.models.Tag;
+import ws.prager.filescan.models.Upload;
+import ws.prager.filescan.models.UploadService;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringApplicationConfiguration(classes = Application.class)
 public class ElasticSearchTest {
     @Autowired
-    private PostService postService;
+    private UploadService uploadService;
     @Autowired
     private ElasticsearchTemplate elasticsearchTemplate;
 
     @Before
     public void before() {
-        elasticsearchTemplate.deleteIndex(Post.class);
-        elasticsearchTemplate.createIndex(Post.class);
-        elasticsearchTemplate.putMapping(Post.class);
-        elasticsearchTemplate.refresh(Post.class, true);
+        elasticsearchTemplate.deleteIndex(Upload.class);
+        elasticsearchTemplate.createIndex(Upload.class);
+        elasticsearchTemplate.putMapping(Upload.class);
+        elasticsearchTemplate.refresh(Upload.class, true);
     }
 
     // @Test
     public void testSave() throws Exception {
         Tag tag = new Tag();
         tag.setId("1");
-        tag.setName("tech");
+        tag.setName("size");
         Tag tag2 = new Tag();
         tag2.setId("2");
-        tag2.setName("elasticsearch");
+        tag2.setName("type");
 
-        Post post = new Post();
-        post.setId("1");
-        post.setTitle("Bigining with spring boot application and elasticsearch");
-        post.setTags(Arrays.asList(tag, tag2));
-        postService.save(post);
+        Upload upload = new Upload();
+        upload.setId("1");
+        upload.setFileName("File1.png");
+        upload.setTags(Arrays.asList(tag, tag2));
+        uploadService.save(upload);
 
-        assertThat(post.getId(), notNullValue());
+        assertThat(upload.getId(), notNullValue());
 
-        Post post2 = new Post();
-        post2.setId("1");
-        post2.setTitle("Bigining with spring boot application");
-        post2.setTags(Arrays.asList(tag));
-        postService.save(post);
-        assertThat(post2.getId(), notNullValue());
+        Upload upload2 = new Upload();
+        upload2.setId("2");
+        upload2.setFileName("File2.txt");
+        upload2.setTags(Arrays.asList(tag));
+        uploadService.save(upload);
+        assertThat(upload2.getId(), notNullValue());
 
     }
 
@@ -72,31 +72,33 @@ public class ElasticSearchTest {
 
     @Test
     public void testFindByTagsName() throws Exception {
-        Tag tag = new Tag();
-        tag.setId("1");
-        tag.setName("tech");
+        Tag tag1 = new Tag();
+        tag1.setId("1");
+        tag1.setName("size");
+        tag1.setValue("1096");
         Tag tag2 = new Tag();
         tag2.setId("2");
-        tag2.setName("elasticsearch");
+        tag2.setName("type");
+        tag2.setValue("image/png");
 
-        Post post = new Post();
-        post.setId("1");
-        post.setTitle("Bigining with spring boot application and elasticsearch");
-        post.setTags(Arrays.asList(tag, tag2));
-        postService.save(post);
+        Upload upload = new Upload();
+        upload.setId("1");
+        upload.setFileName("File1.png");
+        upload.setTags(Arrays.asList(tag1, tag2));
+        uploadService.save(upload);
 
-        Post post2 = new Post();
-        post2.setId("1");
-        post2.setTitle("Bigining with spring boot application");
-        post2.setTags(Arrays.asList(tag));
-        postService.save(post);
+        Upload upload2 = new Upload();
+        upload2.setId("1");
+        upload2.setFileName("File1.png");
+        upload2.setTags(Arrays.asList(tag1));
+        uploadService.save(upload);
 
-        Page<Post> posts = postService.findByTagsName("tech", new PageRequest(0, 10));
-        Page<Post> posts2 = postService.findByTagsName("tech", new PageRequest(0, 10));
-        Page<Post> posts3 = postService.findByTagsName("maz", new PageRequest(0, 10));
+        Page<Upload> uploads = uploadService.findByTagsName("size", new PageRequest(0, 10));
+        Page<Upload> uploads2 = uploadService.findByTagsName("type", new PageRequest(0, 10));
+        Page<Upload> uploads3 = uploadService.findByTagsName("none-existing", new PageRequest(0, 10));
 
-        assertThat(posts.getTotalElements(), is(1L));
-        assertThat(posts2.getTotalElements(), is(1L));
-        assertThat(posts3.getTotalElements(), is(0L));
+        assertThat(uploads.getTotalElements(), is(1L));
+        assertThat(uploads2.getTotalElements(), is(1L));
+        assertThat(uploads3.getTotalElements(), is(0L));
     }
 }

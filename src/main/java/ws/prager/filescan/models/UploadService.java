@@ -3,15 +3,12 @@ package ws.prager.filescan.models;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 
-/**
- * Created by hungnguyen on 12/28/14.
- */
-public interface PostService {
-    Post save(Post post);
+public interface UploadService {
+    Upload save(Upload post);
 
-    Post findOne(String id);
+    Upload findOne(String id);
 
-    Iterable<Post> findAll();
+    Iterable<Upload> findAll();
 
-    Page<Post> findByTagsName(String tagName, PageRequest pageRequest);
+    Page<Upload> findByTagsName(String tagName, PageRequest pageRequest);
 }

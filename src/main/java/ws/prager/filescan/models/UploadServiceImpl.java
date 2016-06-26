@@ -5,32 +5,29 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
-/**
- * Created by hungnguyen on 12/28/14.
- */
 @Service
-public class PostServiceImpl implements PostService {
+public class UploadServiceImpl implements UploadService {
     @Autowired
-    private PostRepository postRepository;
+    private UploadRepository postRepository;
 
     @Override
-    public Post save(Post post) {
+    public Upload save(Upload post) {
         postRepository.save(post);
         return post;
     }
 
     @Override
-    public Post findOne(String id) {
+    public Upload findOne(String id) {
         return postRepository.findOne(id);
     }
 
     @Override
-    public Iterable<Post> findAll() {
+    public Iterable<Upload> findAll() {
         return postRepository.findAll();
     }
 
     @Override
-    public Page<Post> findByTagsName(String tagName, PageRequest pageRequest) {
+    public Page<Upload> findByTagsName(String tagName, PageRequest pageRequest) {
         return postRepository.findByTagsName(tagName, pageRequest);
     }
 }

@@ -1,11 +1,9 @@
 package ws.prager.filescan.models;
 
-/**
- * Created by hungnguyen on 12/28/14.
- */
 public class Tag {
     private String id;
     private String name;
+    private String value;
 
     public String getId() {
         return id;
@@ -22,4 +20,13 @@ public class Tag {
     public void setName(String name) {
         this.name = name;
     }
+
+    public String getValue() {
+        return value;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
+    }
+
 }
